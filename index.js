@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const key = 'sk_test_51L7tFJSIhsnmINRZHIjitSVVv5lOHCAon5gfTFd9pNjCa1leKNzEXq1XY5g7NwuMXk5aXagaIJZf8Y8LGfHGeIAZ00jjXNbV00';
+const key = 'sk_test_myKey';
 const stripe = require('stripe')(key);
 
 const generateAPIKey = () => {
@@ -55,7 +55,7 @@ app.get('/api', async (req, res) => {
             }
         )
         res.send({
-            data: '🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥', usage: record,
+            data: 'some data', usage: record,
         })
     }
 
@@ -84,7 +84,7 @@ app.post('/checkout', async (req, res) => {
         payment_method_types: ['card'],
         line_items: [
             {
-                price: 'price_1L7u9rSIhsnmINRZE6EvdopY',
+                price: 'price_priceKey',
             },
         ],
         success_url: 'http://localhost:5000/dashboard?session_id={CHECKOUT_SESSION_ID}',
@@ -97,7 +97,7 @@ app.post('/webhook', async (req, res) => {
     let data;
     let eventType;
     // Check if webhook signing is configured.
-    const webhookSecret = 'whsec_1bf535d491623f8095fe2a2447284113d6f9862ac5aaff0c35458b63b90218da';
+    const webhookSecret = 'whsec_myWebHook';
 
     if (webhookSecret) {
         // Retrieve the event by verifying the signature using the raw body and secret.
